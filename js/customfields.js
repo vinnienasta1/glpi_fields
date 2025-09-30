@@ -1,16 +1,35 @@
 (()=>{
+  // Переименование полей
   const targetLabelsMap = new Map([
     ["Контактное лицо", "Стеллаж"],
-    ["Группа", "Департамент"]
+    ["Группа", "Департамент"],
+    ["Бюджет", "Проект"],
+    ["Номер заказа", "Договор"]
   ]);
 
+  // Скрытие полей
   const hideLabels = new Set([
+    // Оригинальные поля для скрытия
     "Специалист, ответственный за оборудование",
     "Группа, ответственная за оборудование",
     "Телефон контактного лица",
     "Сеть",
     "Уникальный номер (UUID)",
-    "Источник обновлений"
+    "Источник обновлений",
+    // Новые поля для скрытия
+    "Дата заказа",
+    "Дата доставки",
+    "Дата последней инвентаризации",
+    "Дата ввода в эксплуатацию",
+    "Дата списания",
+    "Номер иммобилизации",
+    "Форма доставки",
+    "Критичность бизнеса",
+    "СCO",
+    "Стоимость",
+    "Контролируемые расходы",
+    "Ежемесячное СCO",
+    "Гарантийная информация"
   ]);
 
   function normalize(text){
@@ -33,12 +52,16 @@
     const labels = document.querySelectorAll("label");
     labels.forEach(label=>{
       const text = normalize(label.textContent);
+      
+      // Переименование полей
       if(targetLabelsMap.has(text)){
         const newText = targetLabelsMap.get(text);
         if(newText && normalize(label.textContent) !== newText){
           label.textContent = newText;
         }
       }
+      
+      // Скрытие полей
       if(hideLabels.has(text)){
         const container = findFieldContainer(label);
         if(container && container.style.display !== "none"){
