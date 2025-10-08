@@ -1,10 +1,10 @@
 # Custom Fields (GLPI 10+)
 
-Плагин изменяет отображение некоторых полей на карточках техники в GLPI.
+Плагин изменяет отображение некоторых полей **во всём интерфейсе GLPI** - в карточках техники, таблицах, фильтрах поиска, выпадающих списках и других элементах.
 
 ## Функционал
 
-### Переименование полей:
+### Переименование полей (применяется везде):
 - **«Контактное лицо» → «Стеллаж»**
 - **«Группа» → «Департамент»**
 - **«Бюджет» → «Проект»**
@@ -29,6 +29,15 @@
 - Ежемесячное СCO
 - Гарантийная информация
 
+### Где применяются изменения:
+- ✅ Карточки техники
+- ✅ Фильтры и критерии поиска
+- ✅ Заголовки таблиц
+- ✅ Выпадающие списки (select)
+- ✅ Подсказки (placeholder, title)
+- ✅ Кнопки и ссылки
+- ✅ Все текстовые элементы интерфейса
+
 Все изменения выполняются на клиенте при активном плагине. При отключении плагина интерфейс возвращается к исходному виду автоматически.
 
 ## Требования
@@ -45,10 +54,10 @@ chown -R www-data:www-data customfields
 ```
 
 ### Через архив:
-1. Скопируйте архив плагина `customfields-1.1.0.tar.gz` или `customfields-1.1.0.zip` в корень GLPI, напр.: `/var/www/glpi`.
+1. Скопируйте архив плагина `customfields-1.2.0.tar.gz` или `customfields-1.2.0.zip` в корень GLPI, напр.: `/var/www/glpi`.
 2. Распакуйте в каталог плагинов:
-   - tar.gz: `sudo tar -xzf customfields-1.1.0.tar.gz -C /var/www/glpi/plugins/`
-   - zip: `sudo unzip customfields-1.1.0.zip -d /var/www/glpi/plugins/`
+   - tar.gz: `sudo tar -xzf customfields-1.2.0.tar.gz -C /var/www/glpi/plugins/`
+   - zip: `sudo unzip customfields-1.2.0.zip -d /var/www/glpi/plugins/`
 3. Выставьте владельца/права (Debian/Ubuntu):
    - `sudo chown -R www-data:www-data /var/www/glpi/plugins/customfields`
    - `sudo find /var/www/glpi/plugins/customfields -type f -exec chmod 0644 {} \;`
@@ -77,6 +86,12 @@ php bin/console plugin:activate customfields
 
 ## Настройка/доработки
 Локализация и логика скрытия/переименования находятся в `plugins/customfields/js/customfields.js`.
+
+## Технические детали
+- Версия: 1.2.0
+- Применяется на всех страницах GLPI
+- Использует MutationObserver для отслеживания динамического контента
+- Обрабатывает: labels, таблицы (th/td), фильтры поиска, выпадающие списки, placeholder, title и другие элементы
 
 ## Лицензия
 MIT License
