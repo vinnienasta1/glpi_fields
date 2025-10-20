@@ -6,7 +6,7 @@ if (!defined('GLPI_ROOT')) {
 function plugin_version_customfields() {
    return [
       'name'           => 'Custom Fields',
-      'version'        => '1.2.0',
+      'version'        => '1.3.0',
       'author'         => 'Local',
       'license'        => 'MIT',
       'homepage'       => 'about:blank',
